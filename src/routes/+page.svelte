@@ -73,24 +73,24 @@
   {#if step === 'main'}
     <div class="main-container">
       <header>
-        <h1>Voca Test Challenge</h1>
+        <h1>영단어로 짤 벗기기</h1>
         <p>테스트를 완료하고 사진을 잠금 해제하세요!</p>
       </header>
 
       <div class="card-group">
         <div class="card">
-          <h3>유형 A</h3>
-          <p>자연과 풍경</p>
+          <h3>빵</h3>
+          <p>거대한 마음</p>
           <button onclick={() => startTest('A')}>시작하기</button>
         </div>
         <div class="card">
-          <h3>유형 B</h3>
-          <p>도시와 건축</p>
+          <h3>농</h3>
+          <p>범죄자 취향</p>
           <button onclick={() => startTest('B')}>시작하기</button>
         </div>
         <div class="card">
-          <h3>유형 C</h3>
-          <p>귀여운 동물들</p>
+          <h3>젖</h3>
+          <p>작은 것부터 큰 것까지</p>
           <button onclick={() => startTest('C')}>시작하기</button>
         </div>
       </div>
