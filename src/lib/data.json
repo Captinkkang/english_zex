@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "word": "confirm",
+    "mean": "입증[확증]하다",
+    "same": ["verify", "prove", "substantiate"],
+    "trans_word": "confirmed",
+    "example1": "The study ",
+    "example2": " the effectiveness of the new treatment."
+  },
+  {
+    "id": 2,
+    "word": "reject",
+    "mean": "거부하다, 거절하다",
+    "same": ["refuse", "decline", "deny"],
+    "trans_word": "rejected",
+    "example1": "He ",
+    "example2": " the offer because it did not meet his expectations."
+  },
+  {
+    "id": 3,
+    "word": "inspire",
+    "mean": "영감을 주다",
+    "same": ["motivate", "stimulate", "encourage"],
+    "trans_word": "inspired",
+    "example1": "Her courage ",
+    "example2": " many students to pursue their dreams."
+  },
+  {
+    "id": 4,
+    "word": "alter",
+    "mean": "변경하다",
+    "same": ["change", "modify", "adjust"],
+    "trans_word": "alter",
+    "example1": "Climate change may ",
+    "example2": " living conditions significantly."
+  },
+  {
+    "id": 5,
+    "word": "justification",
+    "mean": "구실, 변명, 정당화",
+    "same": ["explanation", "excuse", "rationale"],
+    "trans_word": "justification",
+    "example1": "There is no ",
+    "example2": " for such unfair behavior."
+  },
+  {
+    "id": 6,
+    "word": "accumulate",
+    "mean": "축적하다",
+    "same": ["collect", "gather", "build up"],
+    "trans_word": "accumulate",
+    "example1": "Stress can ",
+    "example2": " over time if not managed properly."
+  },
+  {
+    "id": 7,
+    "word": "empathy",
+    "mean": "공감",
+    "same": ["sympathy", "understanding", "compassion"],
+    "trans_word": "Empathy",
+    "example1": "",
+    "example2": " helps people build stronger relationships."
+  },
+  {
+    "id": 8,
+    "word": "inherent",
+    "mean": "내재하는",
+    "same": ["innate", "intrinsic", "built-in"],
+    "trans_word": "inherent",
+    "example1": "Risk is ",
+    "example2": " in every important decision."
+  },
+  {
+    "id": 9,
+    "word": "challenge",
+    "mean": "의심하다",
+    "same": ["question", "dispute", "doubt"],
+    "trans_word": "challenged",
+    "example1": "Scientists ",
+    "example2": " the accuracy of the data."
+  },
+  {
+    "id": 10,
+    "word": "relevant",
+    "mean": "관련 있는",
+    "same": ["related", "connected", "applicable"],
+    "trans_word": "relevant",
+    "example1": "Please provide information ",
+    "example2": " to the topic."
+  },
+  {
+    "id": 11,
+    "word": "abandon",
+    "mean": "포기하다",
+    "same": ["give up", "quit", "desert"],
+    "trans_word": "abandoned",
+    "example1": "They ",
+    "example2": " the plan due to lack of funding."
+  },
+  {
+    "id": 12,
+    "word": "accountable",
+    "mean": "책임 있는",
+    "same": ["responsible", "liable", "answerable"],
+    "trans_word": "accountable",
+    "example1": "Leaders must be ",
+    "example2": " for their decisions."
+  },
+  {
+    "id": 13,
+    "word": "restrict",
+    "mean": "제한하다",
+    "same": ["limit", "confine", "control"],
+    "trans_word": "restrict",
+    "example1": "Laws ",
+    "example2": " the use of harmful chemicals."
+  },
+  {
+    "id": 14,
+    "word": "commitment",
+    "mean": "전념, 헌신",
+    "same": ["dedication", "devotion", "loyalty"],
+    "trans_word": "commitment",
+    "example1": "His ",
+    "example2": " to education is admirable."
+  },
+  {
+    "id": 15,
+    "word": "valid",
+    "mean": "타당한, 근거 있는",
+    "same": ["reasonable", "sound", "justified"],
+    "trans_word": "valid",
+    "example1": "Your argument is ",
+    "example2": " and well supported."
+  },
+  {
+    "id": 16,
+    "word": "interpret",
+    "mean": "해석하다",
+    "same": ["explain", "analyze", "understand"],
+    "trans_word": "interpreted",
+    "example1": "Students ",
+    "example2": " the poem in different ways."
+  },
+  {
+    "id": 17,
+    "word": "essential",
+    "mean": "필수적인",
+    "same": ["necessary", "vital", "crucial"],
+    "trans_word": "essential",
+    "example1": "Sleep is ",
+    "example2": " for good health."
+  },
+  {
+    "id": 18,
+    "word": "emphasize",
+    "mean": "강조하다",
+    "same": ["stress", "highlight", "underline"],
+    "trans_word": "emphasized",
+    "example1": "The teacher ",
+    "example2": " the importance of practice."
+  },
+  {
+    "id": 19,
+    "word": "capacity",
+    "mean": "역량",
+    "same": ["ability", "competence", "potential"],
+    "trans_word": "capacity",
+    "example1": "Humans have a remarkable ",
+    "example2": " for learning."
+  },
+  {
+    "id": 20,
+    "word": "dismiss",
+    "mean": "일축하다",
+    "same": ["reject", "ignore", "brush off"],
+    "trans_word": "dismissed",
+    "example1": "He ",
+    "example2": " the idea as unrealistic."
+  },
+  {
+    "id": 21,
+    "word": "component",
+    "mean": "구성 요소",
+    "same": ["element", "part", "factor"],
+    "trans_word": "component",
+    "example1": "Trust is a key ",
+    "example2": " of teamwork."
+  },
+  {
+    "id": 22,
+    "word": "overlook",
+    "mean": "간과하다",
+    "same": ["miss", "ignore", "neglect"],
+    "trans_word": "overlook",
+    "example1": "We must not ",
+    "example2": " small details in terms of safety."
+  },
+  {
+    "id": 23,
+    "word": "confront",
+    "mean": "마주하다, 직면하다",
+    "same": ["face", "encounter", "tackle"],
+    "trans_word": "confronted",
+    "example1": "She ",
+    "example2": " her fears bravely."
+  },
+  {
+    "id": 24,
+    "word": "distortion",
+    "mean": "왜곡",
+    "same": ["misrepresentation", "contortion", "bias"],
+    "trans_word": "distortion",
+    "example1": "Media ",
+    "example2": " can mislead the public."
+  },
+  {
+    "id": 25,
+    "word": "ultimately",
+    "mean": "궁극적으로",
+    "same": ["finally", "eventually", "in the end"],
+    "trans_word": "ultimately",
+    "example1": "Hard work will ",
+    "example2": " lead to success."
+  },
+  {
+    "id": 26,
+    "word": "perceive",
+    "mean": "여기다, 인식하다",
+    "same": ["recognize", "realize", "sense"],
+    "trans_word": "perceive",
+    "example1": "People ",
+    "example2": " risks differently."
+  },
+  {
+    "id": 27,
+    "word": "evaluate",
+    "mean": "평가하다",
+    "same": ["assess", "judge", "analyze"],
+    "trans_word": "evaluated",
+    "example1": "The teacher ",
+    "example2": " the students' performance carefully."
+  },
+  {
+    "id": 28,
+    "word": "authority",
+    "mean": "권한",
+    "same": ["power", "control", "command"],
+    "trans_word": "authority",
+    "example1": "The government has the ",
+    "example2": " to enforce the law."
+  },
+  {
+    "id": 29,
+    "word": "objective",
+    "mean": "목표",
+    "same": ["goal", "aim", "purpose"],
+    "trans_word": "objective",
+    "example1": "Our main ",
+    "example2": " is to reduce pollution."
+  },
+  {
+    "id": 30,
+    "word": "subsequently",
+    "mean": "그 후에",
+    "same": ["afterward", "later", "eventually"],
+    "trans_word": "subsequently",
+    "example1": "The system failed and was ",
+    "example2": " repaired."
+  },
+  {
+    "id": 31,
+    "word": "effectiveness",
+    "mean": "효과, 효율성",
+    "same": ["efficiency", "impact", "success"],
+    "trans_word": "effectiveness",
+    "example1": "The ",
+    "example2": " of the policy remains uncertain."
+  },
+  {
+    "id": 32,
+    "word": "ingredient",
+    "mean": "요인, 구성 요소",
+    "same": ["element", "component", "factor"],
+    "trans_word": "ingredient",
+    "example1": "Trust is an important ",
+    "example2": " in friendship."
+  },
+  {
+    "id": 33,
+    "word": "abstract",
+    "mean": "추상적인",
+    "same": ["conceptual", "intangible", "nonconcrete"],
+    "trans_word": "abstract",
+    "example1": "Freedom is an ",
+    "example2": " concept that is difficult to define clearly."
+  },
+  {
+    "id": 34,
+    "word": "entail",
+    "mean": "수반하다",
+    "same": ["involve", "require", "include"],
+    "trans_word": "entails",
+    "example1": "This job ",
+    "example2": " long hours and constant concentration."
+  },
+  {
+    "id": 35,
+    "word": "consensus",
+    "mean": "합의, 일치",
+    "same": ["agreement", "unity", "accord"],
+    "trans_word": "consensus",
+    "example1": "Scientists reached a ",
+    "example2": " on the results."
+  },
+  {
+    "id": 36,
+    "word": "consist of",
+    "mean": "~로 구성되다",
+    "same": ["be made up of", "be composed of", "comprise"],
+    "trans_word": "consists of",
+    "example1": "The team ",
+    "example2": " five members."
+  },
+  {
+    "id": 37,
+    "word": "endure",
+    "mean": "견디다, 인내하다",
+    "same": ["tolerate", "withstand", "bear"],
+    "trans_word": "endured",
+    "example1": "She ",
+    "example2": " years of hardship to graduate college successfully."
+  },
+  {
+    "id": 38,
+    "word": "overlap",
+    "mean": "겹치다",
+    "same": ["coincide", "intersect", "merge"],
+    "trans_word": "overlap",
+    "example1": "The two ideas ",
+    "example2": " in meaning."
+  },
+  {
+    "id": 39,
+    "word": "undervalue",
+    "mean": "저평가하다",
+    "same": ["underestimate", "underappreciate", "neglect"],
+    "trans_word": "undervalues",
+    "example1": "Society often ",
+    "example2": " manual labor."
+  },
+  {
+    "id": 40,
+    "word": "indicate",
+    "mean": "보여주다, 나타내다",
+    "same": ["show", "suggest", "point out"],
+    "trans_word": "indicate",
+    "example1": "The results ",
+    "example2": " a clear trend."
+  },
+  {
+    "id": 41,
+    "word": "outcome",
+    "mean": "결과",
+    "same": ["result", "consequence", "effect"],
+    "trans_word": "outcome",
+    "example1": "The final ",
+    "example2": " exceeded our original expectations."
+  },
+  {
+    "id": 42,
+    "word": "rational",
+    "mean": "합리적인",
+    "same": ["logical", "reasonable", "sensible"],
+    "trans_word": "rational",
+    "example1": "He gave a ",
+    "example2": " explanation that everyone accepted."
+  },
+  {
+    "id": 43,
+    "word": "grasp",
+    "mean": "이해하다",
+    "same": ["understand", "comprehend", "realize"],
+    "trans_word": "grasp",
+    "example1": "Students must ",
+    "example2": " the key idea to solve complex problems."
+  },
+  {
+    "id": 44,
+    "word": "trigger",
+    "mean": "유발하다",
+    "same": ["cause", "activate", "provoke"],
+    "trans_word": "trigger",
+    "example1": "Stress can ",
+    "example2": " physical illness."
+  },
+  {
+    "id": 45,
+    "word": "critical",
+    "mean": "중요한",
+    "same": ["crucial", "essential", "vital"],
+    "trans_word": "critical",
+    "example1": "Trust is ",
+    "example2": " to a healthy relationship."
+  },
+  {
+    "id": 46,
+    "word": "investigate",
+    "mean": "연구하다, 조사하다",
+    "same": ["examine", "explore", "research"],
+    "trans_word": "investigate",
+    "example1": "Scientists ",
+    "example2": " the causes of climate change."
+  },
+  {
+    "id": 47,
+    "word": "refer to",
+    "mean": "의미하다",
+    "same": ["mean", "indicate", "denote"],
+    "trans_word": "refers to",
+    "example1": "The word 'self-esteem' ",
+    "example2": " having respect for yourself."
+  },
+  {
+    "id": 48,
+    "word": "determine",
+    "mean": "결정하다",
+    "same": ["decide", "settle", "fix"],
+    "trans_word": "determines",
+    "example1": "Experience ",
+    "example2": " success in many fields."
+  },
+  {
+    "id": 49,
+    "word": "consequently",
+    "mean": "결과적으로",
+    "same": ["therefore", "as a result", "thus"],
+    "trans_word": "consequently",
+    "example1": "He worked hard and ",
+    "example2": " succeeded."
+  },
+  {
+    "id": 50,
+    "word": "precede",
+    "mean": "선행하다",
+    "same": ["come before", "lead", "anticipate"],
+    "trans_word": "precedes",
+    "example1": "Theory ",
+    "example2": " practical application."
+  },
+  {
+    "id": 51,
+    "word": "simultaneously",
+    "mean": "동시에",
+    "same": ["at the same time", "concurrently", "together"],
+    "trans_word": "simultaneously",
+    "example1": "The two events occurred ",
+    "example2": "."
+  },
+  {
+    "id": 52,
+    "word": "purification",
+    "mean": "정화",
+    "same": ["cleansing", "refinement", "filtration"],
+    "trans_word": "purification",
+    "example1": "Water ",
+    "example2": " is essential for public health."
+  },
+  {
+    "id": 53,
+    "word": "subjective",
+    "mean": "주관적인",
+    "same": ["personal", "individual", "biased"],
+    "trans_word": "subjective",
+    "example1": "Artistic beauty is highly ",
+    "example2": "."
+  },
+  {
+    "id": 54,
+    "word": "reflective",
+    "mean": "반영하는",
+    "same": ["thoughtful", "contemplative", "revealing"],
+    "trans_word": "reflective",
+    "example1": "His essay was ",
+    "example2": " of deep personal growth."
+  },
+  {
+    "id": 55,
+    "word": "take place",
+    "mean": "일어나다, 열리다",
+    "same": ["occur", "happen", "be held"],
+    "trans_word": "take place",
+    "example1": "The conference will ",
+    "example2": " next Monday."
+  },
+  {
+    "id": 56,
+    "word": "restoration",
+    "mean": "회복",
+    "same": ["recovery", "renewal", "rehabilitation"],
+    "trans_word": "restoration",
+    "example1": "Forest ",
+    "example2": " is crucial for environmental balance."
+  },
+  {
+    "id": 57,
+    "word": "immediate",
+    "mean": "즉각적인",
+    "same": ["instant", "prompt", "rapid"],
+    "trans_word": "immediate",
+    "example1": "The patient needs ",
+    "example2": " care."
+  },
+  {
+    "id": 58,
+    "word": "diverse",
+    "mean": "다양한",
+    "same": ["various", "varied", "multiple"],
+    "trans_word": "diverse",
+    "example1": "The city has a ",
+    "example2": " population."
+  },
+  {
+    "id": 59,
+    "word": "bygone",
+    "mean": "지나간, 과거의",
+    "same": ["past", "former", "previous"],
+    "trans_word": "bygone",
+    "example1": "We should learn from ",
+    "example2": " mistakes."
+  },
+  {
+    "id": 60,
+    "word": "for the sake of",
+    "mean": "~을 위해",
+    "same": ["for", "in order to", "on behalf of"],
+    "trans_word": "for the sake of",
+    "example1": "He apologized ",
+    "example2": " peace."
+  },
+  {
+    "id": 61,
+    "word": "inactivity",
+    "mean": "비활동",
+    "same": ["idleness", "stillness", "passivity"],
+    "trans_word": "inactivity",
+    "example1": "Prolonged ",
+    "example2": " weakens muscles."
+  },
+  {
+    "id": 62,
+    "word": "imitate",
+    "mean": "모방하다",
+    "same": ["copy", "mimic", "replicate"],
+    "trans_word": "imitate",
+    "example1": "Children often ",
+    "example2": " adults' behavior."
+  },
+  {
+    "id": 63,
+    "word": "normative",
+    "mean": "규범의",
+    "same": ["standard", "customary", "conventional"],
+    "trans_word": "Normative",
+    "example1": "",
+    "example2": " rules guide social behavior."
+  },
+  {
+    "id": 64,
+    "word": "contribution",
+    "mean": "기여",
+    "same": ["donation", "input", "support"],
+    "trans_word": "contribution",
+    "example1": "His ",
+    "example2": " to science is remarkable."
+  },
+  {
+    "id": 65,
+    "word": "modest",
+    "mean": "대단하지 않은",
+    "same": ["moderate", "small", "humble"],
+    "trans_word": "modest",
+    "example1": "She made ",
+    "example2": " progress in math."
+  },
+  {
+    "id": 66,
+    "word": "yield",
+    "mean": "생기게 하다, 생산하다",
+    "same": ["produce", "generate", "result in"],
+    "trans_word": "yielded",
+    "example1": "The experiment ",
+    "example2": " unexpected results."
+  },
+  {
+    "id": 67,
+    "word": "precision",
+    "mean": "정밀도",
+    "same": ["accuracy", "exactness", "correctness"],
+    "trans_word": "precision",
+    "example1": "Surgery requires extreme ",
+    "example2": "."
+  },
+  {
+    "id": 68,
+    "word": "vulnerability",
+    "mean": "취약성",
+    "same": ["weakness", "fragility", "susceptibility"],
+    "trans_word": "vulnerability",
+    "example1": "Children show emotional ",
+    "example2": " easily."
+  },
+  {
+    "id": 69,
+    "word": "confidential",
+    "mean": "비밀의",
+    "same": ["secret", "private", "classified"],
+    "trans_word": "confidential",
+    "example1": "This document is strictly ",
+    "example2": "."
+  },
+  {
+    "id": 70,
+    "word": "adherence",
+    "mean": "엄수, 충실",
+    "same": ["compliance", "observance", "loyalty"],
+    "trans_word": "adherence",
+    "example1": "Strict ",
+    "example2": " ensures better results."
+  },
+  {
+    "id": 71,
+    "word": "maturity",
+    "mean": "성숙(도)",
+    "same": ["adulthood", "ripeness", "development"],
+    "trans_word": "maturity",
+    "example1": "His ",
+    "example2": " impressed the teachers."
+  },
+  {
+    "id": 72,
+    "word": "alternative",
+    "mean": "대체물",
+    "same": ["substitute", "option", "replacement"],
+    "trans_word": "alternative",
+    "example1": "We need a practical ",
+    "example2": " to this plan."
+  },
+  {
+    "id": 73,
+    "word": "benefit",
+    "mean": "이점",
+    "same": ["advantage", "merit", "gain"],
+    "trans_word": "benefits",
+    "example1": "Regular exercise offers many health ",
+    "example2": "."
+  },
+  {
+    "id": 74,
+    "word": "neutral",
+    "mean": "중립의",
+    "same": ["impartial", "unbiased", "objective"],
+    "trans_word": "neutral",
+    "example1": "The judge remained ",
+    "example2": " during the debate."
+  },
+  {
+    "id": 75,
+    "word": "evoke",
+    "mean": "불러일으키다",
+    "same": ["arouse", "elicit", "trigger"],
+    "trans_word": "evoked",
+    "example1": "The song ",
+    "example2": " memories of childhood summers."
+  },
+  {
+    "id": 76,
+    "word": "encounter",
+    "mean": "접하다, 마주치다",
+    "same": ["meet", "face", "confront"],
+    "trans_word": "encountered",
+    "example1": "She ",
+    "example2": " many unexpected difficulties abroad."
+  },
+  {
+    "id": 77,
+    "word": "generate",
+    "mean": "생성하다",
+    "same": ["produce", "create", "cause"],
+    "trans_word": "generated",
+    "example1": "The new policy ",
+    "example2": " positive results quickly."
+  },
+  {
+    "id": 78,
+    "word": "overcome",
+    "mean": "극복하다",
+    "same": ["conquer", "defeat", "surmount"],
+    "trans_word": "overcame",
+    "example1": "She ",
+    "example2": " many challenges through hard work."
+  },
+  {
+    "id": 79,
+    "word": "controversial",
+    "mean": "논쟁의 대상인",
+    "same": ["disputed", "debatable", "provocative"],
+    "trans_word": "controversial",
+    "example1": "The decision became highly ",
+    "example2": " nationwide."
+  },
+  {
+    "id": 80,
+    "word": "convince",
+    "mean": "납득시키다, 확신시키다",
+    "same": ["persuade", "assure", "satisfy"],
+    "trans_word": "convinced",
+    "example1": "She ",
+    "example2": " him with clear evidence."
+  },
+  {
+    "id": 81,
+    "word": "subtle",
+    "mean": "미묘한",
+    "same": ["delicate", "slight", "faint"],
+    "trans_word": "subtle",
+    "example1": "She noticed a ",
+    "example2": " change in tone."
+  },
+  {
+    "id": 82,
+    "word": "inference",
+    "mean": "추론",
+    "same": ["deduction", "conclusion", "reasoning"],
+    "trans_word": "inference",
+    "example1": "We made an ",
+    "example2": " from limited evidence."
+  },
+  {
+    "id": 83,
+    "word": "compelling",
+    "mean": "설득력 있는",
+    "same": ["convincing", "persuasive", "forceful"],
+    "trans_word": "compelling",
+    "example1": "She presented a ",
+    "example2": " argument clearly."
+  },
+  {
+    "id": 84,
+    "word": "portrait",
+    "mean": "초상화",
+    "same": ["painting", "likeness", "depiction"],
+    "trans_word": "portrait",
+    "example1": "The artist painted a detailed ",
+    "example2": "."
+  },
+  {
+    "id": 85,
+    "word": "exemplary",
+    "mean": "모범적인",
+    "same": ["outstanding", "model", "admirable"],
+    "trans_word": "exemplary",
+    "example1": "She showed ",
+    "example2": " leadership at school."
+  },
+  {
+    "id": 86,
+    "word": "narrative",
+    "mean": "서사적인",
+    "same": ["storytelling", "descriptive", "dramatic"],
+    "trans_word": "narrative",
+    "example1": "The film has a strong ",
+    "example2": " structure."
+  },
+  {
+    "id": 87,
+    "word": "succession",
+    "mean": "연속",
+    "same": ["sequence", "series", "progression"],
+    "trans_word": "succession",
+    "example1": "A ",
+    "example2": " of events changed history."
+  },
+  {
+    "id": 88,
+    "word": "empathize",
+    "mean": "공감하다",
+    "same": ["understand", "relate to", "sympathize"],
+    "trans_word": "empathized",
+    "example1": "She ",
+    "example2": " with his difficult situation."
+  },
+  {
+    "id": 89,
+    "word": "striking",
+    "mean": "놀라운",
+    "same": ["remarkable", "impressive", "astonishing"],
+    "trans_word": "striking",
+    "example1": "She made a ",
+    "example2": " improvement this year."
+  },
+  {
+    "id": 90,
+    "word": "spouse",
+    "mean": "배우자",
+    "same": ["partner", "husband", "wife"],
+    "trans_word": "spouse",
+    "example1": "She proudly introduced her ",
+    "example2": " at the ceremony."
+  },
+  {
+    "id": 91,
+    "word": "strengthen",
+    "mean": "강화하다",
+    "same": ["reinforce", "enhance", "fortify"],
+    "trans_word": "strengthens",
+    "example1": "Regular practice ",
+    "example2": " your language skills significantly."
+  },
+  {
+    "id": 92,
+    "word": "conservative",
+    "mean": "보수적인",
+    "same": ["traditional", "cautious", "conventional"],
+    "trans_word": "conservative",
+    "example1": "He has a ",
+    "example2": " view on social change."
+  },
+  {
+    "id": 93,
+    "word": "interpret",
+    "mean": "해석하다",
+    "same": ["explain", "understand", "translate"],
+    "trans_word": "interpreted",
+    "example1": "Students ",
+    "example2": " the poem in different ways."
+  },
+  {
+    "id": 94,
+    "word": "territory",
+    "mean": "영역",
+    "same": ["area", "region", "domain"],
+    "trans_word": "territory",
+    "example1": "This topic belongs to a new ",
+    "example2": "."
+  },
+  {
+    "id": 95,
+    "word": "stable",
+    "mean": "안정적인",
+    "same": ["steady", "secure", "firm"],
+    "trans_word": "stable",
+    "example1": "The company maintains a ",
+    "example2": " financial structure."
+  },
+  {
+    "id": 96,
+    "word": "fake",
+    "mean": "조작하다",
+    "same": ["fabricate", "forge", "falsify"],
+    "trans_word": "faked",
+    "example1": "He ",
+    "example2": " the results to avoid trouble."
+  },
+  {
+    "id": 97,
+    "word": "adapt",
+    "mean": "적응하다",
+    "same": ["adjust", "accommodate", "modify"],
+    "trans_word": "adapted",
+    "example1": "She quickly ",
+    "example2": " to her new school."
+  },
+  {
+    "id": 98,
+    "word": "relevant",
+    "mean": "관련 있는",
+    "same": ["related", "pertinent", "connected"],
+    "trans_word": "relevant",
+    "example1": "Please provide ",
+    "example2": " information for the report."
+  },
+  {
+    "id": 99,
+    "word": "stimulation",
+    "mean": "자극",
+    "same": ["encouragement", "activation", "excitement"],
+    "trans_word": "stimulation",
+    "example1": "The game provides mental ",
+    "example2": " for students."
+  },
+  {
+    "id": 100,
+    "word": "neuron",
+    "mean": "뉴런, 신경 세포",
+    "same": ["nerve cell", "brain cell", "neural cell"],
+    "trans_word": "neuron",
+    "example1": "Each ",
+    "example2": " sends signals to other cells."
+  }
+]
