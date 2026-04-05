@@ -12,36 +12,46 @@
 
   let { setIdx, words, rewardType, onHome, onNext, setImages }: Props = $props();
 
+  // --- [로직 유지] ---
   let currentIdx = $state(0);
   let userInput = $state("");
   let answered = $state<boolean[]>(new Array(20).fill(false));
   let correct = $state<boolean[]>(new Array(20).fill(false));
   let shuffledBank = $state<string[]>([]);
+  let showWrongNotes = $state(false);
+  let isReviewMode = $state(false);
+  let isInverted = $state(false); 
 
-  $effect(() => {
-    if (setIdx !== undefined) {
-      currentIdx = 0;
-      userInput = "";
-      answered = new Array(20).fill(false);
-      correct = new Array(20).fill(false);
+  $effect(() => { if (setIdx !== undefined) resetSet(); });
+
+  function resetSet() {
+    currentIdx = 0; userInput = "";
+    answered = new Array(20).fill(false);
+    correct = new Array(20).fill(false);
+    updateBank();
+    showWrongNotes = false; isReviewMode = false; isInverted = false;
+  }
+
+  function updateBank() {
+    const isNowStepFive = isInverted ? (setIdx % 2 !== 0) : (setIdx % 2 === 0);
+    if (!isNowStepFive) {
       shuffledBank = [...words].map(w => w.word).sort(() => Math.random() - 0.5);
+    } else {
+      shuffledBank = [];
     }
-  });
+  }
 
   let currentWord = $derived(words[currentIdx]);
   let isAllAnswered = $derived(answered.every(a => a));
-  let isStepFive = $derived(setIdx % 2 === 0); 
+  let isStepFive = $derived(isInverted ? (setIdx % 2 !== 0) : (setIdx % 2 === 0)); 
   let targetAnswer = $derived(isStepFive ? currentWord.word : currentWord.trans_word);
+  let wrongWords = $derived(words.filter((_, i) => answered[i] && !correct[i]));
 
   let completionRate = $derived.by(() => {
-    if (isStepFive) {
-      const groupIdx = Math.floor(currentIdx / 5);
-      const count = correct.slice(groupIdx * 5, (groupIdx + 1) * 5).filter(c => c).length;
-      return count * 20;
-    } else {
-      const count = correct.filter(c => c).length;
-      return count * 5;
-    }
+    const totalCorrect = correct.filter(c => c).length;
+    return isStepFive 
+      ? (Math.floor(currentIdx / 5) * 0 + (correct.slice(Math.floor(currentIdx/5)*5, (Math.floor(currentIdx/5)*5)+5).filter(c=>c).length * 20)) 
+      : (totalCorrect * 5);
   });
 
   let maskHeight = $derived(100 - completionRate);
@@ -49,137 +59,288 @@
 
   function check() {
     if (answered[currentIdx] || !userInput.trim()) return;
-    if (userInput.trim().toLowerCase() === targetAnswer.toLowerCase()) {
-      correct[currentIdx] = true;
-    }
+    if (userInput.trim().toLowerCase() === targetAnswer.toLowerCase()) correct[currentIdx] = true;
     answered[currentIdx] = true;
   }
 
-  function goNext() { if (currentIdx < 19) { currentIdx++; userInput = ""; } }
+  function handleNext() {
+    if (currentIdx < 19) { currentIdx++; userInput = ""; }
+    else { if (setIdx < 4) onNext(); else onHome(); }
+  }
+
   function goPrev() { if (currentIdx > 0) { currentIdx--; userInput = ""; } }
+  
+  function startReview() {
+    const firstWrong = words.findIndex((_, i) => !correct[i]);
+    if (firstWrong === -1) return;
+    words.forEach((_, i) => { if (!correct[i]) answered[i] = false; });
+    currentIdx = firstWrong; userInput = ""; showWrongNotes = false; isReviewMode = true;
+  }
+  
+  function startInversion() {
+    isInverted = !isInverted; updateBank();
+    currentIdx = 0; userInput = "";
+    answered = new Array(20).fill(false); correct = new Array(20).fill(false);
+  }
 </script>
 
-<div class="test-container">
-  <div class="top-nav">
-    <button class="home-btn" onclick={onHome}>🏠 HOME</button>
-    <div class="progress-info">
-      SET {setIdx + 1} <span class="divider">|</span> <span class="counter">{currentIdx + 1} / 20</span>
-    </div>
+<div class="test-page-container">
+  <div class="ba-test-bg">
+    <div class="bg-img-inner"></div>
+    <div class="bg-overlay-trapezoid"></div>
+    <div class="pattern-dots"></div>
   </div>
 
-  <div class="main-layout">
-    <div class="question-box">
-      {#if isStepFive}
-        <div class="input-area">
-          <span class="initial-hint">{currentWord.word.charAt(0)}</span>
-          <input 
-            bind:value={userInput} 
-            disabled={answered[currentIdx]} 
-            class:correct={answered[currentIdx] && correct[currentIdx]}
-            class:wrong={answered[currentIdx] && !correct[currentIdx]} 
-            onkeydown={(e) => e.key === 'Enter' && check()}
-            placeholder="단어 입력"
-          />
-        </div>
-        <p class="sub-text">동의어: {currentWord.same.join(", ")}</p>
-      {:else}
-        <div class="example-box">
-          <p class="example-text">
-            {currentWord.example1} 
-            <input 
-              bind:value={userInput} 
-              disabled={answered[currentIdx]} 
-              class="inline-input"
-              class:correct={answered[currentIdx] && correct[currentIdx]}
-              class:wrong={answered[currentIdx] && !correct[currentIdx]}
-              onkeydown={(e) => e.key === 'Enter' && check()}
-            /> 
-            {currentWord.example2}
-          </p>
-        </div>
-        <div class="word-grid">
-          {#each shuffledBank as word}
-            {@const originalIdx = words.findIndex(w => w.word === word)}
-            <div class="word-item" 
-                 class:is-correct={answered[originalIdx] && correct[originalIdx]}
-                 class:is-wrong={answered[originalIdx] && !correct[originalIdx]}>
-              {word}
+  <div class="test-content-inner">
+    <div class="top-nav">
+      <button class="home-btn" onclick={onHome}>🏠 LOBBY</button>
+      <div class="progress-info">
+        <span class="mode-text">{isReviewMode ? 'RE-TEST' : (isInverted ? 'INVERTED' : 'MISSION')}</span>
+        <span class="set-text">SET {setIdx + 1} | {currentIdx + 1} / 20</span>
+      </div>
+    </div>
+
+    <div class="split-layout">
+      <div class="left-panel">
+        {#if !showWrongNotes}
+          <div class="question-box">
+            <div class="type-badge">{isStepFive ? 'SYNONYM' : 'PRACTICE'}</div>
+            
+            {#if isStepFive}
+              <div class="input-area">
+                <div class="halo-id">{currentWord.word.charAt(0)}</div>
+                <input 
+                  bind:value={userInput} 
+                  disabled={answered[currentIdx]} 
+                  class:correct={answered[currentIdx] && correct[currentIdx]}
+                  class:wrong={answered[currentIdx] && !correct[currentIdx]} 
+                  placeholder="입력..."
+                  onkeydown={(e) => e.key === 'Enter' && check()}
+                />
+              </div>
+              <p class="hint-text"><span>HINT:</span> {currentWord.same.join(", ")}</p>
+            {:else}
+              <div class="example-box">
+                <p class="example-text">
+                  {currentWord.example1} 
+                  <input 
+                    bind:value={userInput} 
+                    disabled={answered[currentIdx]} 
+                    class="inline-input"
+                    class:correct={answered[currentIdx] && correct[currentIdx]}
+                    class:wrong={answered[currentIdx] && !correct[currentIdx]}
+                    onkeydown={(e) => e.key === 'Enter' && check()}
+                  /> 
+                  {currentWord.example2}
+                </p>
+              </div>
+              <div class="word-bank-container">
+                <div class="word-grid-5x4">
+                  {#each shuffledBank as word}
+                    {@const oIdx = words.findIndex(w => w.word === word)}
+                    <div class="word-item" class:is-correct={answered[oIdx] && correct[oIdx]} class:is-wrong={answered[oIdx] && !correct[oIdx]}>
+                      {word}
+                    </div>
+                  {/each}
+                </div>
+              </div>
+            {/if}
+
+            {#if answered[currentIdx]}
+              <div class="result-display" class:is-success={correct[currentIdx]}>
+                <div class="res-title">
+                  {correct[currentIdx] ? '✓ MISSION COMPLETE' : '✗ LOG ERROR'}
+                </div>
+                <div class="res-content">
+                  <p>정답: <strong>{targetAnswer}</strong></p>
+                  <p>의미: {currentWord.mean}</p>
+                </div>
+              </div>
+            {/if}
+
+            <div class="control-area">
+              <div class="nav-row">
+                <button class="side-btn big" onclick={goPrev} disabled={currentIdx === 0}>PREV</button>
+                <button class="check-btn big" onclick={check} disabled={answered[currentIdx]}>CONFIRM</button>
+                <button class="side-btn next big active-trigger" 
+                        onclick={handleNext} 
+                        disabled={!answered[currentIdx]}
+                        class:active={answered[currentIdx]}>
+                  {currentIdx < 19 ? 'NEXT' : 'FINISH'}
+                </button>
+              </div>
             </div>
-          {/each}
+          </div>
+        {:else}
+          <div class="note-box">
+            <div class="note-header"><h3>FAIL LOGS</h3></div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr><th>WORD</th><th>MEANING</th><th>SYNONYM</th></tr>
+                </thead>
+                <tbody>
+                  {#each wrongWords as w}
+                    <tr>
+                      <td class="word-cell">{w.word}</td>
+                      <td class="mean-cell">{w.mean}</td>
+                      <td>{w.same.join(", ")}</td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </table>
+            </div>
+            <button class="review-btn big" onclick={startReview}>RE-DEPLOY</button>
+          </div>
+        {/if}
+      </div>
+
+      <div class="right-panel">
+        <div class="reward-container">
+          <div class="gauge-section">
+            <div class="gauge-label">
+              <span>SYNC RATE</span>
+              <span class="percent-text">{completionRate}%</span>
+            </div>
+            <div class="gauge-bar-bg">
+              <div class="gauge-bar-fill" style="width: {completionRate}%"></div>
+            </div>
+          </div>
+
+          <div class="puzzle-frame">
+            <img src="/images/{rewardType}/{currentPhoto}" alt="Reward" />
+            <div class="mask" style="height: {maskHeight}%;"></div>
+            <div class="frame-border-deco"></div>
+          </div>
         </div>
-      {/if}
-      
-      {#if answered[currentIdx]}
-        <div class="answer-reveal" class:text-success={correct[currentIdx]} class:text-danger={!correct[currentIdx]}>
-          {correct[currentIdx] ? '정답입니다!' : '오답입니다.'} 정답: <strong>{targetAnswer}</strong>
-        </div>
-      {/if}
-
-      <button class="check-btn" onclick={check} disabled={answered[currentIdx]}>확인</button>
-    </div>
-
-    <div class="nav-btns">
-      <button class="nav-btn" onclick={goPrev} disabled={currentIdx === 0}>이전</button>
-      <button class="nav-btn next" onclick={goNext} disabled={!answered[currentIdx] || currentIdx === 19}>다음</button>
-    </div>
-
-    <div class="reward-section">
-      <div class="completion-badge">완성률: {completionRate}%</div>
-      <div class="puzzle-container">
-        <img src="/images/{rewardType}/{currentPhoto}" alt="Reward" />
-        <div class="mask" style="height: {maskHeight}%;"></div>
+        
+        {#if isAllAnswered && !showWrongNotes}
+          <div class="final-actions">
+            {#if wrongWords.length > 0}
+              <button class="hud-btn highlight" onclick={() => showWrongNotes = true}>OPEN LOGS</button>
+            {/if}
+            <button class="hud-btn special" onclick={startInversion}>INVERT TYPE</button>
+            <button class="hud-btn dark" onclick={onHome}>LOBBY</button>
+          </div>
+        {/if}
       </div>
     </div>
   </div>
-
-  {#if isAllAnswered}
-    <div class="complete-area">
-      <button class="next-set-btn" onclick={onNext}>
-        {setIdx < 4 ? '다음 세트 진행 ➔' : '모든 테스트 완료'}
-      </button>
-    </div>
-  {/if}
 </div>
 
 <style>
-  /* 기본 레이아웃 및 정렬 유지 */
-  .test-container { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
-  .top-nav { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 500px; margin-bottom: 20px; }
-  .main-layout { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 20px; }
-  .question-box, .reward-section { width: 100%; max-width: 500px; box-sizing: border-box; }
-  .question-box { background: white; padding: 30px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; }
+  .test-page-container { position: relative; width: 100%; min-height: 100vh; overflow-x: hidden; }
+  .ba-test-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #eef2f5; }
+  
+  .bg-img-inner {
+    position: absolute; 
+    width: 100%; 
+    height: 100%;
+    background: url('/tool/샬레내부.webp') no-repeat center;
+    background-size: cover; 
+    opacity: 0.5;
+  }
+  
+  .bg-overlay-trapezoid {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 70%; 
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(2px);
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+  }
 
-  /* 색상 피드백 스타일 (중요!) */
-  input.correct { background-color: #e8f5e9 !important; border-color: #2ecc71 !important; color: #27ae60 !important; }
-  input.wrong { background-color: #fff5f5 !important; border-color: #ff7675 !important; color: #d63031 !important; }
-  
-  .answer-reveal { margin-top: 15px; font-size: 1rem; font-weight: 500; }
-  .text-success { color: #27ae60; } /* 초록색 */
-  .text-danger { color: #eb4d4b; }  /* 빨간색 */
+  .pattern-dots {
+    position: absolute; 
+    width: 100%; 
+    height: 100%;
+    background-image: radial-gradient(#00A3FF 1px, transparent 1px);
+    background-size: 40px 40px; 
+    opacity: 0.08;
+  }
 
-  /* 나머지 스타일 유지 */
-  .input-area { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
-  input { padding: 12px; border: 2px solid #eef0f2; border-radius: 12px; font-size: 1.1rem; width: 180px; text-align: center; transition: all 0.2s; }
-  .inline-input { width: 140px; border-top: none; border-left: none; border-right: none; border-radius: 0; }
+  .test-content-inner { width: 100%; max-width: 1200px; margin: 0 auto; padding: 40px 20px; font-family: 'Pretendard', sans-serif; }
+  .split-layout { display: grid; grid-template-columns: 1fr 420px; gap: 40px; align-items: start; }
   
-  .word-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 20px; }
-  .word-item { padding: 8px 4px; font-size: 0.8rem; background: #f1f2f6; border-radius: 8px; border: 1px solid #dfe4ea; color: #7f8c8d; }
-  .word-item.is-correct { background: #2ecc71 !important; color: white !important; border-color: #27ae60; }
-  .word-item.is-wrong { background: #ff7675 !important; color: white !important; border-color: #d63031; }
+  .question-box, .note-box { 
+    background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(5px);
+    padding: 35px; border-radius: 0 40px 0 40px; border: 3px solid #fff;
+    box-shadow: 15px 15px 0px rgba(0, 163, 255, 0.05);
+  }
 
-  .puzzle-container { position: relative; width: 100%; aspect-ratio: 4 / 3; background: #2d3436; border-radius: 20px; overflow: hidden; border: 5px solid white; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-  .puzzle-container img { width: 100%; height: 100%; object-fit: contain; }
-  .mask { position: absolute; top: 0; left: 0; width: 100%; background: #f8f9fa; transition: height 0.6s ease-out; }
+  .top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 4px solid #123456; padding-bottom: 15px; }
   
-  .completion-badge { background: #ebfbee; color: #2ecc71; padding: 6px 16px; border-radius: 20px; font-weight: 800; margin-bottom: 10px; border: 1.5px solid #2ecc71; display: inline-block; }
+  .home-btn, .side-btn, .check-btn, .next, .review-btn, .hud-btn {
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .home-btn { background: #123456; color: white; border: none; padding: 8px 20px; border-radius: 6px; }
+  .home-btn:hover { background: #00A3FF; transform: scale(1.05); }
+
+  .mode-text { color: #00A3FF; font-weight: 900; margin-right: 15px; font-size: 0.9rem; }
+  .set-text { font-weight: 900; color: #123456; font-size: 1.1rem; }
+
+  .input-area { display: flex; align-items: center; justify-content: center; margin-bottom: 25px; }
+  .halo-id { width: 80px; height: 80px; background: #00A3FF; color: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 900; margin-right: 20px; }
+  input { height: 80px; border: 3px solid #e2e8f0; border-radius: 15px; font-size: 1.6rem; padding: 0 20px; width: 300px; text-align: center; font-weight: 900; box-sizing: border-box; }
+  input:focus { border-color: #00A3FF; outline: none; }
+  input.correct { border-color: #00A3FF; color: #00A3FF; background: #f0faff; }
+  input.wrong { border-color: #ff5e5e; color: #ff5e5e; background: #fff5f5; }
+
+  .big { height: 85px !important; font-size: 1.4rem !important; border-radius: 0 20px 0 20px !important; }
+  .nav-row { display: grid; grid-template-columns: 120px 1fr 140px; gap: 15px; }
   
-  button { cursor: pointer; transition: transform 0.1s, background 0.2s; font-weight: bold; border: none; border-radius: 10px; padding: 10px; }
-  button:active { transform: scale(0.96); }
-  .check-btn { width: 100%; padding: 15px; margin-top: 20px; background: #2f3542; color: white; }
-  .nav-btn { padding: 10px 30px; background: #dfe4ea; color: #2f3542; }
-  .nav-btn.next { background: #0984e3; color: white; }
-  .next-set-btn { background: #00b894; color: white; padding: 18px 45px; font-size: 1.2rem; }
+  .side-btn { background: #e2e8f0; color: #4a5568; border: none; }
+  .side-btn:hover:not(:disabled) { background: #cbd5e0; transform: translateY(-2px); }
+
+  .check-btn { background: #123456; color: white; border: none; box-shadow: 4px 4px 0px #00A3FF; }
+  .check-btn:hover:not(:disabled) { background: #1a4a7a; transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #00A3FF; }
+
+  .next.active { background: #00A3FF; color: white; box-shadow: 4px 4px 0px #123456; }
+  .next.active:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #123456; }
+
+  .word-bank-container { margin-top: 25px; padding: 15px; background: rgba(241, 245, 249, 0.8); border-radius: 15px; }
+  .word-grid-5x4 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .word-item { height: 50px; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.85rem; border: 1.5px solid #e2e8f0; }
+  .word-item.is-correct { background: #00A3FF !important; color: white; border-color: #00A3FF; }
+  .word-item.is-wrong { background: #ff5e5e !important; color: white; border-color: #ff5e5e; }
+
+  /* [수정 포인트] 정답 해설 박스 간격 추가 */
+  .result-display { 
+    margin-top: 30px; 
+    margin-bottom: 40px; /* 아래 컨트롤 영역과의 간격을 넉넉히 확보 */
+    padding: 20px; 
+    border-radius: 15px; 
+    background: #f8fafc; 
+    border-left: 8px solid #123456; 
+  }
+  .result-display.is-success { border-color: #00A3FF; background: #f0f9ff; }
+  .gauge-bar-bg { width: 100%; height: 16px; background: #e2e8f0; border-radius: 8px; overflow: hidden; border: 3px solid white; }
+  .gauge-bar-fill { height: 100%; background: #00A3FF; transition: width 0.4s ease; }
+
+  /* 사진 프레임 */
+  .puzzle-frame { 
+    position: relative; width: 400px; height: 500px; border-radius: 0 30px 0 30px; 
+    overflow: hidden; border: 6px solid white; background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+  .puzzle-frame img { width: 100%; height: 100%; object-fit: contain; }
+  .mask { position: absolute; top: 0; left: 0; width: 100%; background: #f3f7f9; transition: height 0.6s ease; z-index: 2; border-bottom: 3px solid #00A3FF; }
+
+  .final-actions { margin-top: 25px; display: flex; flex-direction: column; gap: 12px; }
+  .hud-btn { padding: 18px; border-radius: 0 15px 0 15px; border: none; font-size: 1rem; box-shadow: 4px 4px 0px rgba(0,0,0,0.1); }
+  .hud-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px rgba(0,0,0,0.2); }
+  .hud-btn.special { background: #00A3FF; color: white; }
+  .hud-btn.dark { background: #123456; color: white; }
+  .hud-btn.highlight { background: #ff5e5e; color: white; }
   
-  .initial-hint { font-size: 1.8rem; color: #0984e3; font-weight: 800; }
-  .counter { color: #0984e3; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  th { background: #123456; color: white; padding: 12px; text-align: left; }
+  td { padding: 15px 12px; border-bottom: 1px solid #e2e8f0; background: white; }
+  .word-cell { color: #00A3FF; font-weight: 900; }
+  .review-btn { width: 100%; margin-top: 25px; background: #ff5e5e; color: white; border: none; box-shadow: 4px 4px 0px #123456; }
+  .review-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #123456; }
 </style>
