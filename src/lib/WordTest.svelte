@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { untrack } from 'svelte'; // 추가
   import type { WordItem, RewardType } from './types';
 
   interface Props {
@@ -22,7 +23,23 @@
   let isInverted = $state(false); 
   let sessionWords = $state<WordItem[]>([...words]);
 
-  $effect(() => { if (setIdx !== undefined) resetSet(); });
+  // [수정] 무한 루프 방지를 위해 untrack 사용
+  // setIdx가 바뀔 때만 이 내부 로직이 실행됩니다.
+  $effect(() => {
+    setIdx; // setIdx의 변화만 추적합니다.
+    
+    untrack(() => {
+      currentIdx = 0; 
+      userInput = "";
+      answered = new Array(20).fill(false);
+      correct = new Array(20).fill(false);
+      isInverted = false;
+      showWrongNotes = false; 
+      isReviewMode = false;
+      sessionWords = [...words];
+      updateBank(setIdx % 2 === 0);
+    });
+  });
 
   function resetSet() {
     currentIdx = 0; userInput = "";
@@ -240,6 +257,7 @@
 </div>
 
 <style>
+  /* 스타일 코드는 동일하므로 생략하거나 기존 코드를 그대로 유지하세요 */
   .test-page-container { position: relative; width: 100%; min-height: 100vh; overflow-x: hidden; }
   .ba-test-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #eef2f5; }
   .bg-img-inner { position: absolute; width: 100%; height: 100%; background: url('/tool/샬레내부.webp') no-repeat center; background-size: cover; opacity: 0.7; }
@@ -274,7 +292,6 @@
   .gauge-bar-bg { width: 100%; height: 16px; background: #e2e8f0; border-radius: 8px; overflow: hidden; border: 3px solid white; }
   .gauge-bar-fill { height: 100%; background: #00A3FF; transition: width 0.4s ease; }
 
-  /* [수정] 사진 박스: 세로 높이 고정 해제 및 가로 고정 */
   .puzzle-frame { 
     position: relative; 
     width: 400px; 
@@ -286,7 +303,7 @@
   }
   .puzzle-frame img { 
     width: 100%; 
-    height: auto; /* 비율에 맞게 조정 */
+    height: auto; 
     display: block;
   }
   .mask { position: absolute; top: 0; left: 0; width: 100%; background: #f3f7f9; transition: height 0.6s ease; z-index: 2; border-bottom: 3px solid #00A3FF; }
