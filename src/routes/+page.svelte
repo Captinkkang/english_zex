@@ -89,11 +89,11 @@
 
         <div class="card-group">
           <div class="ba-card">
-            <div class="card-tag">RANK A</div>
+            <div class="card-tag">1538</div>
             <div class="card-content">
-              <span class="category">BBANG</span>
-              <h3>빵</h3>
-              <p>거대한 마음을 가진 학생들과의 기록</p>
+              <span class="category">Slender</span>
+              <h3>슬렌더</h3>
+              <p>다양한 매려이 있는 학생들과의 기록</p>
             </div>
             <button class="ba-start-btn" onclick={() => startTest('A')}>
               DEPLOY <span class="arrow">▶</span>
@@ -102,7 +102,7 @@
           </div>
 
           <div class="ba-card">
-            <div class="card-tag special">RANK S</div>
+            <div class="card-tag special">1124</div>
             <div class="card-content">
               <span class="category">NONG</span>
               <h3>농</h3>
@@ -115,11 +115,11 @@
           </div>
 
           <div class="ba-card">
-            <div class="card-tag">RANK B</div>
+            <div class="card-tag">2245</div>
             <div class="card-content">
-              <span class="category">ALL</span>
+              <span class="category">BBang</span>
               <h3>전체</h3>
-              <p>다양한 매력을 가진 학생들과의 기록</p>
+              <p>거대한 마음을 가진 학생들과의 기록</p>
             </div>
             <button class="ba-start-btn" onclick={() => startTest('C')}>
               DEPLOY <span class="arrow">▶</span>
