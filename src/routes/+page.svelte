@@ -118,7 +118,7 @@
             <div class="card-tag">2245</div>
             <div class="card-content">
               <span class="category">BBang</span>
-              <h3>전체</h3>
+              <h3>빵</h3>
               <p>거대한 마음을 가진 학생들과의 기록</p>
             </div>
             <button class="ba-start-btn" onclick={() => startTest('C')}>
