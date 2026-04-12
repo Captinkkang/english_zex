@@ -9,3 +9,9 @@ export interface WordItem {
 }
 
 export type RewardType = 'A' | 'B' | 'C' | '';
+
+export interface PersonalWord {
+  id: string;
+  spelling: string;
+  meanings: string[];
+}
