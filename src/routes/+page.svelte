@@ -281,16 +281,33 @@
 </main>
 
 <style>
+  /* 1. 기존의 모든 스타일 변함없이 유지 */
   :global(:root) { --ba-blue: #00A3FF; --ba-dark: #123456; --ba-bg-light: #F3F7F9; --ba-white: #FFFFFF; --ba-gray: #7F8C8D; --ba-border: #E2E8F0; }
-  :global(html, body) { margin: 0; padding: 0; width: 100%; height: 100%; background-color: var(--ba-bg-light); font-family: 'Pretendard', sans-serif; overflow: hidden; }
+  
+  /* 2. 스크롤 제한만 해제 (overflow: hidden 제거 및 auto 추가) */
+  :global(html, body) { 
+    margin: 0; 
+    padding: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: var(--ba-bg-light); 
+    font-family: 'Pretendard', sans-serif; 
+    overflow-y: auto !important; /* 잘림 방지를 위해 세로 스크롤 허용 */
+  }
 
-  .ba-app { min-height: 100vh; position: relative; z-index: 1; overflow: hidden; }
+  .ba-app { 
+    min-height: 100vh; 
+    position: relative; 
+    z-index: 1; 
+    /* overflow: hidden 제거 */
+  }
+
   .ba-main-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; }
   .bg-base-image { position: absolute; width: 100%; height: 100%; background: url('/tool/샬레전경.webp') no-repeat center; background-size: cover; }
   .bg-trapezoid-overlay { position: absolute; top: 0; right: 0; width: 75%; height: 100%; background: rgba(243, 247, 249, 0.88); clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%); backdrop-filter: blur(5px); }
   .grid-overlay { position: absolute; width: 100%; height: 100%; background-image: radial-gradient(var(--ba-blue) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.12; }
   
-  .lobby-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; height: 100vh; display: flex; flex-direction: column; position: relative; }
+  .lobby-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; min-height: 100vh; display: flex; flex-direction: column; position: relative; }
   
   .ba-header { width: 100%; padding: 40px 0 20px 0; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 4px solid var(--ba-dark); margin-bottom: 40px; flex-shrink: 0; }
   .header-left { display: flex; align-items: center; gap: 15px; }
